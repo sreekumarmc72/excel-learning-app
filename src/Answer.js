@@ -129,20 +129,14 @@ const Answer = ({ qn }) => {
     const validateDocument = (extractedTexts) => {
         let errors = [];
 
-        console.log('validateDocument');
-
         validatorArr.forEach((validator) => {
-            console.log('validator : ', validator);
             extractedTexts.forEach((item, index) => {
                 console.log(`extractedTexts[${index}]:${item.text.trim()}`);
             });
-            console.log('validator.text.trim():' + validator.text.trim());
-            console.log('extractedTexts.find(item => item.text.trim() === validator.text.trim()) : ', extractedTexts.find(item => item.text.trim() == validator.text.trim()));
             const match = extractedTexts.find(item => item.text.trim() == validator.text.trim());
             if (!match) {
                 errors.push({ content: validator.text, issue: "Text not found" });
             } else {
-                console.log('match : ', match);
 
                 if (match.bold !== validator.bold) errors.push({ content: validator.text, issue: "Font is not Bold" });
                 if (match.italic !== validator.italic) errors.push({ content: validator.text, issue: "Font is not Italic" });
@@ -156,8 +150,6 @@ const Answer = ({ qn }) => {
             setMismatches([]);
             setShowModal(true);
         } else {
-
-            console.log('errors : ', errors);
             setMismatches(errors);
             setErrorMessage("Word validation : Shown input are invalid");
         }
